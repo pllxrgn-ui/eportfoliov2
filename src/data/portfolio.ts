@@ -48,6 +48,16 @@ export const projects: Project[] = [
     link: "https://github.com/ITGuns/Internal-Company-Portal---SAVAGE-LLC",
   },
   {
+    title: "Zakay",
+    year: "2026",
+    description:
+      "A mobile UI/UX design for a smart route companion that helps Davao commuters plan routes, compare travel options, and navigate local transit with clearer guidance.",
+    impact:
+      "Turned a common Davao mobility problem into a focused app concept with route discovery, commuter-friendly decision support, and accessible mobile flows.",
+    tags: ["Figma", "UI/UX", "Mobile App", "Davao Routes"],
+    link: "https://www.figma.com/design/kHko6qSXHIuSVWfweAAfyt/Untitled?node-id=0-1&t=fgLpNQs3PcqMhwcz-1",
+  },
+  {
     title: "NurseBot App",
     year: "2025",
     description:

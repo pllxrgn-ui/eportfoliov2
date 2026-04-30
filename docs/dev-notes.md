@@ -225,6 +225,31 @@
 - Run `npm run build`.
 - Open the Work section and confirm project order and card spacing on desktop and mobile.
 
+## 2026-04-30 - Zakay Selected Work Entry
+
+### Completed
+- Added Zakay as a selected-work project for a Davao smart route companion mobile UI/UX design.
+- Linked the work item to the supplied Figma design file.
+- Updated feature documentation to reflect project links from GitHub, Figma, and Canva.
+
+### Files Changed
+- `src/data/portfolio.ts`
+- `docs/features.md`
+- `docs/dev-notes.md`
+
+### Decisions Made
+- Kept the change data-driven because the selected-work section already renders from `projects`.
+- Used the supplied product framing, "a smart route companion in Davao", as the source for the project summary.
+- Did not add a local screenshot because Figma authentication returned a reauthentication error during extraction.
+
+### How to Test
+- Run `npm run lint`.
+- Run `npm run build`.
+- Start `npm run dev` and verify Zakay appears in the Selected work section with the Figma link.
+
+### Next Steps
+- Export or reconnect the Figma design so the portfolio can include an exact Zakay thumbnail or case-study preview.
+
 ## 2026-04-29 - Work and Credential Spacing Cleanup
 
 ### Completed
@@ -526,3 +551,25 @@
 - Run `npm run lint`.
 - Run `npm run build`.
 - Run `npm run preview` and check the favicon, hero card image, certificate previews, and back-to-top button.
+
+## 2026-04-30 - Selected Work Equal Height Cards
+
+### Completed
+- Equalized selected-work card heights on desktop by letting the project grid stretch all rows to the tallest card.
+- Added a stable minimum card height so the project grid reads as an aligned set.
+- Adjusted internal project-card spacing so descriptions stay at the top while tags and project links settle consistently near the bottom.
+- Kept mobile cards at natural height to avoid excessive empty space on small screens.
+
+### Files Changed
+- `src/styles.css`
+- `docs/dev-notes.md`
+
+### Decisions Made
+- Used CSS grid row sizing instead of JavaScript measurement so the layout adapts automatically when project text changes.
+- Kept the existing card design system and only refined sizing, spacing, and alignment.
+
+### How to Test
+- Run `npm run lint`.
+- Run `npm run build`.
+- Open the Work section on desktop and confirm all selected-work cards align to a consistent height.
+- Resize to mobile and confirm the cards stack naturally without large blank areas.
