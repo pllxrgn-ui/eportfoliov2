@@ -579,12 +579,10 @@ a {
   gap: 0.72rem;
   justify-content: flex-start;
   padding: clamp(0.95rem, 1.6vw, 1.18rem);
-  transform-style: preserve-3d;
-  will-change: transform;
   transition:
-    transform 220ms ease,
     border-color 220ms ease,
-    background 220ms ease;
+    background 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .project-card-body {
@@ -597,9 +595,9 @@ a {
 }
 
 .project-card:hover {
-  transform: translateY(-7px) rotateX(1deg);
   border-color: rgba(231, 185, 95, 0.42);
   background: linear-gradient(180deg, rgba(41, 38, 28, 0.98), rgba(23, 23, 20, 0.94));
+  box-shadow: 0 24px 82px rgba(0, 0, 0, 0.38);
 }
 
 .project-index {

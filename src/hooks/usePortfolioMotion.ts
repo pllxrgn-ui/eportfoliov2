@@ -150,10 +150,9 @@ export function usePortfolioMotion() {
         });
       });
 
-      gsap.from(".project-card", {
-        y: 24,
+      gsap.from(".project-card-body", {
+        y: 18,
         opacity: 0,
-        scale: 0.985,
         duration: 0.55,
         stagger: 0.06,
         ease: "power3.out",

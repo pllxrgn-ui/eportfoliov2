@@ -559,9 +559,11 @@
 - Added a stable minimum card height so the project grid reads as an aligned set.
 - Adjusted internal project-card spacing so descriptions stay at the top while tags and project links settle consistently near the bottom.
 - Kept mobile cards at natural height to avoid excessive empty space on small screens.
+- Locked project-card frames in place by moving scroll animation to the card contents and removing vertical hover lift from the card box.
 
 ### Files Changed
 - `src/styles.css`
+- `src/hooks/usePortfolioMotion.ts`
 - `docs/dev-notes.md`
 
 ### Decisions Made
