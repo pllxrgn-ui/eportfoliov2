@@ -26,6 +26,7 @@ export const profile = {
   phone: "0962-568-3345",
   linkedin: "https://www.linkedin.com/in/pdvillorente/",
   facebook: "https://web.facebook.com/Pollygonbear/",
+  resumeHref: publicAsset("resume/RESUME_Villorente.pdf"),
   summary:
     "I build practical software with a strong eye for interfaces, operations, and AI-assisted workflows. My work spans clinic systems, object detection, mobile medical support, Java CRUD tooling, and business inventory reporting.",
 };

@@ -575,3 +575,27 @@
 - Run `npm run build`.
 - Open the Work section on desktop and confirm all selected-work cards align to a consistent height.
 - Resize to mobile and confirm the cards stack naturally without large blank areas.
+
+## 2026-05-07 - Resume Download CTA
+
+### Completed
+- Added the supplied resume PDF as a public site asset.
+- Added a `Download resume` button to the hero action group.
+- Added a matching resume download action in the Contact section.
+- Updated feature documentation to mention downloadable resume access.
+
+### Files Changed
+- `public/resume/RESUME_Villorente.pdf`
+- `src/App.tsx`
+- `src/data/portfolio.ts`
+- `docs/features.md`
+- `docs/dev-notes.md`
+
+### Decisions Made
+- Stored the resume under `public/resume` so GitHub Pages can serve it as a static file.
+- Centralized the resume URL in `profile.resumeHref` to avoid repeating the path across the app.
+
+### How to Test
+- Run `npm run lint`.
+- Run `npm run build`.
+- Open the homepage and confirm the hero and Contact `Download resume` actions download the PDF.

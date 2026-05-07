@@ -5,6 +5,7 @@
 The homepage presents Pol Danyael Villorente as a computer science graduate and full-stack/UI-focused builder. It includes:
 
 - Hero summary with contact actions.
+- Downloadable resume from the hero and contact sections.
 - Featured project links from GitHub, Figma, and Canva.
 - Work and education timeline.
 - Skills grouped by engineering, design, data, AI, and professional strengths.

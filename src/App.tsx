@@ -4,6 +4,7 @@ import {
   Award,
   BriefcaseBusiness,
   Code2,
+  Download,
   ExternalLink,
   GraduationCap,
   Linkedin,
@@ -125,6 +126,10 @@ function App() {
                 <a className="button primary" href={`mailto:${profile.email}`}>
                   <Mail size={18} aria-hidden="true" />
                   Email me
+                </a>
+                <a className="button secondary" href={profile.resumeHref} download>
+                  <Download size={18} aria-hidden="true" />
+                  Download resume
                 </a>
                 <a className="button secondary" href={profile.linkedin} target="_blank" rel="noreferrer">
                   <Linkedin size={18} aria-hidden="true" />
@@ -303,6 +308,10 @@ function App() {
               <a href={profile.linkedin} target="_blank" rel="noreferrer">
                 <Linkedin size={18} aria-hidden="true" />
                 LinkedIn profile
+              </a>
+              <a href={profile.resumeHref} download>
+                <Download size={18} aria-hidden="true" />
+                Download resume
               </a>
               <a href={profile.facebook} target="_blank" rel="noreferrer">
                 <FaFacebookF size={17} aria-hidden="true" />
