@@ -599,3 +599,23 @@
 - Run `npm run lint`.
 - Run `npm run build`.
 - Open the homepage and confirm the hero and Contact `Download resume` actions download the PDF.
+
+## 2026-05-10 - ESC Food Hub Selected Work Entry
+
+### Completed
+- Added ESC Food Hub as a selected-work project.
+- Linked the project card to the GitHub repository.
+- Summarized the project as a LAN-based food ordering system for an internet cafe and food hub.
+
+### Files Changed
+- `src/data/portfolio.ts`
+- `docs/dev-notes.md`
+
+### Decisions Made
+- Used the repository README as the source for the project description and impact statement.
+- Placed the project first because it is a 2026 work item and the selected-work list is ordered newest to oldest.
+
+### How to Test
+- Run `npm run lint`.
+- Run `npm run build`.
+- Open the Work section and confirm ESC Food Hub appears with the GitHub link.

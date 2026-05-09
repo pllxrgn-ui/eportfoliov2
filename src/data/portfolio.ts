@@ -39,6 +39,16 @@ export const heroStats = [
 
 export const projects: Project[] = [
   {
+    title: "ESC Food Hub",
+    year: "2026",
+    description:
+      "A LAN-based food ordering system for an internet cafe and food hub, letting customers place food and drink orders from assigned computer stations.",
+    impact:
+      "Reduced manual ordering delays and miscommunication by giving staff an admin dashboard for active orders, status updates, and menu item management.",
+    tags: ["PHP", "MySQL", "XAMPP", "Food Ordering"],
+    link: "https://github.com/pllxrgn-ui/esc-food-hub",
+  },
+  {
     title: "SAVAGE LLC Internal Portal",
     year: "2026",
     description:
