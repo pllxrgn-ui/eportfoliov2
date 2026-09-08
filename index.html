@@ -272,6 +272,22 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
 .foot-copy{grid-column:span 3;font-size:var(--fs-eyebrow);text-transform:uppercase;letter-spacing:0.18em;color:var(--muted)}
 @media (min-width:1024px){.foot-copy{text-align:right}}
 
+/* ============ lightbox ============ */
+#lightbox{position:fixed;inset:0;z-index:70;background:rgba(8,8,10,0.96);display:flex;flex-direction:column;padding:var(--gutter);opacity:0;pointer-events:none;transition:opacity 300ms ease}
+#lightbox.open{opacity:1;pointer-events:auto}
+.lb-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.lb-title{font-family:var(--font-display);font-size:var(--fs-h3);text-transform:uppercase;letter-spacing:-0.01em;line-height:1}
+#lbClose{font-size:var(--fs-eyebrow);font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);transition:color 300ms}
+#lbClose:hover{color:var(--accent)}
+.lb-stage{flex:1;display:grid;place-items:center;min-height:0;padding:1.5rem 0}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border:1px solid var(--line);background:#fff}
+.lb-bottom{display:flex;align-items:center;justify-content:space-between}
+.lb-count{font-size:var(--fs-eyebrow);letter-spacing:0.18em;color:var(--muted);font-variant-numeric:tabular-nums;text-transform:uppercase}
+.lb-nav{display:flex;gap:2rem}
+.lb-nav button{font-size:var(--fs-eyebrow);font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--foreground);transition:color 300ms}
+.lb-nav button:hover{color:var(--accent)}
+.card-open{display:block;width:100%;text-align:left;cursor:pointer}
+
 /* ============ liquid image ============ */
 .liquid{position:relative;overflow:hidden;background:var(--surface)}
 .liquid.bare{background:transparent}
@@ -550,6 +566,21 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
   </footer>
 </main>
 
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Project preview">
+  <div class="lb-top">
+    <p class="lb-title" id="lbTitle"></p>
+    <button type="button" id="lbClose">Close &#10005;</button>
+  </div>
+  <div class="lb-stage"><img id="lbImg" alt="Project preview"></div>
+  <div class="lb-bottom">
+    <p class="lb-count" id="lbCount"></p>
+    <div class="lb-nav">
+      <button type="button" id="lbPrev">&#8592; Prev</button>
+      <button type="button" id="lbNext">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
 <script type="importmap">
 { "imports": { "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.19/dist/lenis.mjs" } }
 </script>
@@ -588,13 +619,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const PROJECTS = [
   { title:"Chapman's A/C &amp; Heating", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
     blurb:"Mobile-first, accessibility-led rebuild for a Louisiana HVAC contractor — 32 routes with WCAG 2.2 AA as a hard gate, plus a staff ops panel with dispatch board, leads, and live chat.",
-    link:null, img:"public/work-shots/chapmans-ac.webp" },
+    link:"https://chapmans-ac.vercel.app", img:"public/work-shots/chapmans-ac.webp" },
   { title:"Bayou City Aire", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
     blurb:"Full redesign of a Houston HVAC contractor's site — 20 routes, a design system derived from the client's own logo, a motion system, SEO infrastructure, and an on-page site assistant.",
-    link:null, img:"public/work-shots/bayou-city-ac.webp" },
+    link:"https://bayou-city-ac.vercel.app", img:"public/work-shots/bayou-city-ac.webp" },
   { title:"Fresh Air HVAC", year:"2026", outcome:"React + Vite", cat:"Design Concept",
     blurb:"Editorial 'newspaper' design system for a commercial HVAC marketing site — serif display over monochrome with one red accent — plus a companion dispatch dashboard.",
-    link:null, img:"public/work-shots/fresh-air.webp" },
+    link:null, img:"public/work-shots/fresh-air.webp",
+    gallery:["public/work-shots/fa-prev-1.webp","public/work-shots/fresh-air.webp","public/work-shots/fa-prev-3.webp"] },
   { title:"SAVAGE LLC Internal Portal", year:"2026", outcome:"React", cat:"Internal Tools",
     blurb:"Company operations dashboard for time tracking, tasks, announcements, chat, and files — daily staff workflows in one responsive workspace.",
     link:"https://github.com/ITGuns/Internal-Company-Portal---SAVAGE-LLC", img:"public/work-shots/company-portal-dashboard.png" },
@@ -748,13 +780,50 @@ PROJECTS.forEach((p,i) => {
             <p class="outcome">${p.outcome}</p>
           </div>
         </div>
-        <p class="cat">${p.cat}</p>
+        <p class="cat">${p.cat}${p.gallery ? " &middot; Click to preview" : ""}</p>
       </article>`;
   li.innerHTML = p.link
     ? `<a href="${p.link}" target="_blank" rel="noreferrer noopener">${card}</a>`
-    : card;
+    : p.gallery
+      ? `<button type="button" class="card-open" aria-haspopup="dialog">${card}</button>`
+      : card;
+  if (p.gallery){
+    li.querySelector(".card-open").addEventListener("click", () => lbOpen(p.title, p.gallery));
+  }
   workUl.appendChild(li);
   buildLiquid(li.querySelector("figure"));
+});
+
+/* ---------- lightbox ---------- */
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbTitle = document.getElementById("lbTitle");
+const lbCount = document.getElementById("lbCount");
+let lbSet = [], lbIdx = 0;
+function lbShow(){
+  lbImg.src = lbSet[lbIdx];
+  lbCount.textContent = `0${lbIdx+1} / 0${lbSet.length}`;
+}
+function lbOpen(title, imgs){
+  lbSet = imgs; lbIdx = 0;
+  lbTitle.textContent = title;
+  lbShow();
+  lb.classList.add("open");
+  lenis.stop();
+}
+function lbClose(){
+  lb.classList.remove("open");
+  lenis.start();
+}
+document.getElementById("lbClose").addEventListener("click", lbClose);
+document.getElementById("lbPrev").addEventListener("click", () => { lbIdx = (lbIdx - 1 + lbSet.length) % lbSet.length; lbShow(); });
+document.getElementById("lbNext").addEventListener("click", () => { lbIdx = (lbIdx + 1) % lbSet.length; lbShow(); });
+lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb-stage")) lbClose(); });
+addEventListener("keydown", e => {
+  if (!lb.classList.contains("open")) return;
+  if (e.key === "Escape") lbClose();
+  if (e.key === "ArrowLeft") { lbIdx = (lbIdx - 1 + lbSet.length) % lbSet.length; lbShow(); }
+  if (e.key === "ArrowRight") { lbIdx = (lbIdx + 1) % lbSet.length; lbShow(); }
 });
 
 /* ---------- marquee ---------- */
