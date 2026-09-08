@@ -212,6 +212,41 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
 #credentials li a:hover .t{color:var(--accent)}
 #credentials li a .m{flex-shrink:0;text-align:right;font-size:var(--fs-eyebrow);text-transform:uppercase;letter-spacing:0.14em;color:var(--muted)}
 
+/* stack */
+#stack ul.stack-groups{margin-top:4rem}
+.stack-group{display:grid;grid-template-columns:auto 1fr;column-gap:1.5rem;border-top:1px solid var(--line);padding:2rem 0}
+.stack-group:last-child{border-bottom:1px solid var(--line)}
+.stack-group .num{font-size:var(--fs-h3);font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1.15}
+.stack-group h3{font-size:var(--fs-h3);font-weight:600;letter-spacing:-0.01em;line-height:1.15}
+.skill-tags{margin-top:1.25rem;display:flex;flex-wrap:wrap;align-items:center;row-gap:0.75rem}
+.skill-tags .tag{font-family:var(--font-display);font-size:1.5rem;text-transform:uppercase;letter-spacing:0.02em;line-height:1;color:var(--foreground);transition:color 300ms ease-out;white-space:nowrap}
+.skill-tags .tag:hover{color:var(--accent)}
+.skill-tags .sdot{width:0.375rem;height:0.375rem;border-radius:9999px;background:var(--accent);margin-inline:1rem;flex-shrink:0}
+
+/* contact form */
+.contact-grid{display:grid;grid-template-columns:1fr;gap:4rem}
+@media (min-width:1024px){
+  .contact-grid{grid-template-columns:repeat(12,1fr);gap:var(--gutter)}
+  .c-left{grid-column:span 7}
+  .c-right{grid-column:span 5;padding-top:0.5rem}
+}
+.form-title{font-size:var(--fs-h3);font-weight:600;letter-spacing:-0.01em;line-height:1.15}
+#contactForm label{display:block;font-size:var(--fs-eyebrow);font-weight:500;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);margin-top:2rem}
+#contactForm input,#contactForm textarea{display:block;width:100%;margin-top:0.75rem;background:transparent;border:0;border-bottom:1px solid var(--line-strong);border-radius:0;padding:0.75rem 0;color:var(--foreground);font-family:var(--font-sans);font-size:var(--fs-body);outline:none;transition:border-color 300ms}
+#contactForm input:focus,#contactForm textarea:focus{border-color:var(--accent)}
+#contactForm textarea{resize:vertical;min-height:8rem}
+#contactForm ::placeholder{color:rgba(128,127,120,0.55)}
+.f-row{display:grid;grid-template-columns:1fr;column-gap:1.5rem}
+@media (min-width:640px){.f-row{grid-template-columns:1fr 1fr}}
+#sendBtn{margin-top:2.5rem;display:inline-flex;align-items:center;gap:0.75rem;border:1px solid var(--line-strong);padding:1.1rem 2.2rem;font-size:var(--fs-eyebrow);font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--foreground);transition:border-color 300ms,color 300ms,transform 300ms}
+#sendBtn .arrow{color:var(--accent)}
+#sendBtn:hover{border-color:var(--accent);color:var(--accent);transform:translateX(6px)}
+#sendBtn:disabled{opacity:0.5;pointer-events:none}
+#formStatus{margin-top:1.25rem;font-size:var(--fs-eyebrow);text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);min-height:1.2em}
+#formStatus.ok{color:var(--foreground)}
+#formStatus.err{color:var(--accent)}
+.hp{position:absolute;left:-9999px;top:auto;opacity:0;height:0;width:0;overflow:hidden}
+
 /* contact footer */
 #contact{padding-top:var(--section);padding-inline:var(--gutter)}
 #contact h2{max-width:18ch;font-size:var(--fs-h1);line-height:0.95}
@@ -274,6 +309,7 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
     </a>
     <ul class="nav-links">
       <li><a href="#story">Story</a></li>
+      <li><a href="#stack">Stack</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#impact">Impact</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -287,6 +323,7 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
 </header>
 <div id="mobileMenu">
   <a href="#story">Story</a>
+  <a href="#stack">Stack</a>
   <a href="#work">Work</a>
   <a href="#impact">Impact</a>
   <a href="#experience">Experience</a>
@@ -368,6 +405,20 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
     </div>
   </section>
 
+  <!-- ============ stack ============ -->
+  <section id="stack" class="pad">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">The Toolkit</p>
+        <h2 class="display-head h-big reveal-lines">
+          <span class="line-mask"><span>What I build with.</span></span>
+        </h2>
+      </div>
+      <p class="sec-count rv">05 / Disciplines</p>
+    </div>
+    <ul class="stack-groups" id="stackList"></ul>
+  </section>
+
   <!-- ============ work ============ -->
   <section id="work" class="pad">
     <div class="sec-head">
@@ -378,7 +429,7 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
           <span class="line-mask"><span>to be used.</span></span>
         </h2>
       </div>
-      <p class="sec-count rv">08 / Projects</p>
+      <p class="sec-count rv">10 / Projects</p>
     </div>
     <ul class="cards" id="workCards"></ul>
   </section>
@@ -399,7 +450,7 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
         <dt>BS Computer Science graduate</dt>
       </div>
       <div class="stat rv" style="transition-delay:110ms">
-        <dd class="display-head">8</dd>
+        <dd class="display-head">10</dd>
         <dt>Systems designed &amp; built</dt>
       </div>
       <div class="stat rv" style="transition-delay:220ms">
@@ -451,15 +502,36 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
   <!-- ============ contact footer ============ -->
   <footer id="contact">
     <p class="eyebrow rv">Let's Build</p>
-    <h2 class="display-head reveal-lines" style="margin-top:1.5rem">
-      <span class="line-mask"><span>Have something</span></span>
-      <span class="line-mask"><span>worth building?</span></span>
-    </h2>
-    <p class="note rv">That's usually where I start. Based in Davao City, open to remote work — I read every message I'm sent.</p>
-    <div class="rv">
-      <a class="email-link" href="mailto:pdvillorente12@gmail.com">pdvillorente12@gmail.com <span class="arrow">&#8599;</span></a>
-      <br>
-      <a class="resume-link" href="public/resume/RESUME_Villorente.pdf" target="_blank" rel="noreferrer noopener">Download Résumé</a>
+    <div class="contact-grid" style="margin-top:1.5rem">
+      <div class="c-left">
+        <h2 class="display-head reveal-lines">
+          <span class="line-mask"><span>Have something</span></span>
+          <span class="line-mask"><span>worth building?</span></span>
+        </h2>
+        <p class="note rv">That's usually where I start. Based in Davao City, open to remote work — I read every message I'm sent.</p>
+        <div class="rv">
+          <a class="email-link" href="mailto:pdvillorente12@gmail.com">pdvillorente12@gmail.com <span class="arrow">&#8599;</span></a>
+          <br>
+          <a class="resume-link" href="public/resume/RESUME_Villorente.pdf" target="_blank" rel="noreferrer noopener">Download Résumé</a>
+        </div>
+      </div>
+      <form class="c-right rv" id="contactForm" novalidate>
+        <p class="form-title">Or send it straight from here</p>
+        <div class="f-row">
+          <label>Name
+            <input name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          </label>
+          <label>Email
+            <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+        </div>
+        <label>Message
+          <textarea name="message" rows="5" placeholder="What are we building?" required></textarea>
+        </label>
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" id="sendBtn">Send Message <span class="arrow">&#8599;</span></button>
+        <p id="formStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
     <div class="foot-bar">
       <div class="foot-sig">
@@ -514,9 +586,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 /* ---------- data ---------- */
 const PROJECTS = [
-  { title:"ESC Food Hub", year:"2026", outcome:"PHP + MySQL", cat:"Food Ordering",
-    blurb:"LAN-based food ordering for an internet café and food hub — customers order from assigned stations, staff manage everything from an admin dashboard.",
-    link:"https://github.com/pllxrgn-ui/esc-food-hub", img:"public/work-shots/esc-food-hub.webp" },
+  { title:"Chapman's A/C &amp; Heating", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
+    blurb:"Mobile-first, accessibility-led rebuild for a Louisiana HVAC contractor — 32 routes with WCAG 2.2 AA as a hard gate, plus a staff ops panel with dispatch board, leads, and live chat.",
+    link:null, img:"public/work-shots/chapmans-ac.webp" },
+  { title:"Bayou City Aire", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
+    blurb:"Full redesign of a Houston HVAC contractor's site — 20 routes, a design system derived from the client's own logo, a motion system, SEO infrastructure, and an on-page site assistant.",
+    link:null, img:"public/work-shots/bayou-city-ac.webp" },
+  { title:"Fresh Air HVAC", year:"2026", outcome:"React + Vite", cat:"Design Concept",
+    blurb:"Editorial 'newspaper' design system for a commercial HVAC marketing site — serif display over monochrome with one red accent — plus a companion dispatch dashboard.",
+    link:null, img:"public/work-shots/fresh-air.webp" },
   { title:"SAVAGE LLC Internal Portal", year:"2026", outcome:"React", cat:"Internal Tools",
     blurb:"Company operations dashboard for time tracking, tasks, announcements, chat, and files — daily staff workflows in one responsive workspace.",
     link:"https://github.com/ITGuns/Internal-Company-Portal---SAVAGE-LLC", img:"public/work-shots/company-portal-dashboard.png" },
@@ -657,8 +735,7 @@ PROJECTS.forEach((p,i) => {
   const li = document.createElement("li");
   li.className = "rv rv-60";
   li.style.transitionDelay = (i % 2 === 1 ? 120 : 0) + "ms";
-  li.innerHTML = `
-    <a href="${p.link}" target="_blank" rel="noreferrer noopener">
+  const card = `
       <article class="card">
         <figure class="liquid" role="img" aria-label="${p.title}" data-label="${p.title}"${p.img?` data-src="${p.img}"`:""}></figure>
         <div class="meta">
@@ -672,8 +749,10 @@ PROJECTS.forEach((p,i) => {
           </div>
         </div>
         <p class="cat">${p.cat}</p>
-      </article>
-    </a>`;
+      </article>`;
+  li.innerHTML = p.link
+    ? `<a href="${p.link}" target="_blank" rel="noreferrer noopener">${card}</a>`
+    : card;
   workUl.appendChild(li);
   buildLiquid(li.querySelector("figure"));
 });
@@ -720,6 +799,66 @@ function setXp(i){
   }));
 }
 setXp(0);
+
+/* ---------- stack ---------- */
+const STACK = [
+  { title:"Frontend", skills:["React JS","JavaScript","Tailwind CSS","Expo","Figma","Canva"] },
+  { title:"Backend & Data", skills:["Node JS","Supabase","PostgreSQL","Prisma","MySQL","SQL"] },
+  { title:"Programming", skills:["Java","Python","C++","C#","Data Structures","Algorithms"] },
+  { title:"AI & Systems", skills:["LLMs","Hugging Face","NLP","TensorFlow","Raspberry Pi","CCNA"] },
+  { title:"Professional", skills:["Open-minded","Accountable","Adaptable","Growth-oriented","Organized"] },
+];
+const stackUl = document.getElementById("stackList");
+STACK.forEach((g,i) => {
+  const li = document.createElement("li");
+  li.className = "stack-group rv";
+  li.style.transitionDelay = (i*90) + "ms";
+  li.innerHTML = `
+    <span class="num">0${i+1}</span>
+    <div>
+      <h3>${g.title}</h3>
+      <div class="skill-tags">${g.skills.map(s => `<span class="tag">${s}</span>`).join('<span class="sdot"></span>')}</div>
+    </div>`;
+  stackUl.appendChild(li);
+});
+
+/* ---------- contact form ---------- */
+const cform = document.getElementById("contactForm");
+cform.addEventListener("submit", async e => {
+  e.preventDefault();
+  const st = document.getElementById("formStatus");
+  const btn = document.getElementById("sendBtn");
+  const data = Object.fromEntries(new FormData(cform).entries());
+  if (data._honey) return;
+  if (!data.name.trim() || !data.message.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)){
+    st.className = "err"; st.textContent = "Please fill in name, a valid email, and a message.";
+    return;
+  }
+  btn.disabled = true; st.className = ""; st.textContent = "Sending…";
+  try {
+    const r = await fetch("https://formsubmit.co/ajax/pdvillorente12@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        name: data.name, email: data.email, message: data.message,
+        _subject: "Portfolio contact — " + data.name,
+        _captcha: "false", _template: "table",
+      }),
+    });
+    const j = await r.json().catch(() => ({}));
+    if (r.ok && String(j.success) !== "false"){
+      st.className = "ok"; st.textContent = "Message sent — I read everything, expect a reply.";
+      cform.reset();
+    } else {
+      throw new Error(j.message || "send failed");
+    }
+  } catch (err) {
+    st.className = "err";
+    st.innerHTML = 'Couldn&#39;t send — email me directly at <a href="mailto:pdvillorente12@gmail.com" style="color:var(--accent)">pdvillorente12@gmail.com</a>.';
+  } finally {
+    btn.disabled = false;
+  }
+});
 
 /* ---------- credentials ---------- */
 const certUl = document.getElementById("certList");
