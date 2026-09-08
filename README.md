@@ -1,42 +1,37 @@
-# Pol Danyael Villorente E-Portfolio
+# eportfoliov2
 
-Personal portfolio site for Pol Danyael Villorente, built as a responsive React/Vite frontend with real resume, project, and certificate content.
+Personal portfolio of **Pol Danyael Villorente** — live at
+<https://pllxrgn-ui.github.io/eportfoliov2/>.
 
-## Tech Stack
+## What this is
 
-- React 19
-- TypeScript
-- Vite
-- CSS custom properties
-- Lucide React icons
+A single, self-contained `index.html` — pure HTML + CSS + JS, no build step,
+no framework, no npm. Cinematic dark one-pager: Anton + Onest type, giant
+accent-red hero name with letter-by-letter reveal, portrait composited in
+front, Lenis smooth scroll, infinite marquee, scroll-triggered section
+reveals, SVG liquid-distortion image hovers.
 
-## Local Development
+The only external dependencies are Google Fonts and Lenis (loaded from
+jsDelivr via an importmap). Everything else is inline.
 
-```bash
-npm install
-npm run dev
-```
+## Editing
 
-## Verification
+All content is hardcoded in `index.html`:
 
-```bash
-npm run lint
-npm run build
-```
+- Projects, experience, and certificates live in JS arrays (`PROJECTS`,
+  `EXPERIENCE`, `CERTS`) near the bottom of the file.
+- Static assets (résumé, certificate PDFs, images) live under `public/` —
+  same paths the old React app used.
+- The hero portrait is `public/images/portrait.webp` (transparent-background
+  cutout). Replace that file to change the photo.
 
-## Deployment
+## Deploying
 
-This project is ready for GitHub Pages through the included workflow at `.github/workflows/deploy.yml`.
+Push to `main`. The GitHub Actions workflow uploads the repo root straight to
+GitHub Pages — no build. Preview locally by opening `index.html` in a browser
+or running any static server from the repo root.
 
-1. Push the project to a GitHub repository.
-2. In GitHub, open **Settings > Pages**.
-3. Set **Source** to **GitHub Actions**.
-4. Push to `main`, or run the workflow manually from the **Actions** tab.
+## History
 
-The Vite build uses a relative base path so the site can run from a GitHub Pages project URL such as `https://username.github.io/repository-name/`.
-
-## Content Sources
-
-- Resume: `D:/work dawg/UPDATED RESUME.docx`
-- Certificates: `D:/CODE/eportfoliov2/certs`
-- Project links: Canva URLs provided in the project brief
+Before September 2026 this was a Vite + React + TypeScript app; the full
+source is in git history (`git log`, commits up to `4886648`).
