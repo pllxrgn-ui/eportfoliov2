@@ -287,6 +287,9 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
 .lb-nav button{font-size:var(--fs-eyebrow);font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--foreground);transition:color 300ms}
 .lb-nav button:hover{color:var(--accent)}
 .card-open{display:block;width:100%;text-align:left;cursor:pointer}
+.ops-btn{margin-top:1rem;display:inline-flex;align-items:center;gap:0.75rem;font-size:var(--fs-eyebrow);font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);transition:color 300ms;cursor:pointer}
+.ops-btn::before{content:"";width:1.5rem;height:1px;background:var(--accent)}
+.ops-btn:hover{color:var(--foreground)}
 
 /* ============ liquid image ============ */
 .liquid{position:relative;overflow:hidden;background:var(--surface)}
@@ -445,7 +448,7 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
           <span class="line-mask"><span>to be used.</span></span>
         </h2>
       </div>
-      <p class="sec-count rv">10 / Projects</p>
+      <p class="sec-count rv">09 / Projects</p>
     </div>
     <ul class="cards" id="workCards"></ul>
   </section>
@@ -617,16 +620,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 /* ---------- data ---------- */
 const PROJECTS = [
-  { title:"Chapman's A/C &amp; Heating", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
+  { title:"Chapman's A/C & Heating", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
     blurb:"Mobile-first, accessibility-led rebuild for a Louisiana HVAC contractor — 32 routes with WCAG 2.2 AA as a hard gate, plus a staff ops panel with dispatch board, leads, and live chat.",
-    link:"https://chapmans-ac.vercel.app", img:"public/work-shots/chapmans-ac.webp" },
+    link:"https://chapmans-ac.vercel.app", img:"public/work-shots/chapmans-ac.webp",
+    gallery:["public/work-shots/chapmans-ops-1.webp","public/work-shots/chapmans-ops-2.webp"] },
   { title:"Bayou City Aire", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
     blurb:"Full redesign of a Houston HVAC contractor's site — 20 routes, a design system derived from the client's own logo, a motion system, SEO infrastructure, and an on-page site assistant.",
-    link:"https://bayou-city-ac.vercel.app", img:"public/work-shots/bayou-city-ac.webp" },
-  { title:"Fresh Air HVAC", year:"2026", outcome:"React + Vite", cat:"Design Concept",
-    blurb:"Editorial 'newspaper' design system for a commercial HVAC marketing site — serif display over monochrome with one red accent — plus a companion dispatch dashboard.",
-    link:null, img:"public/work-shots/fresh-air.webp",
-    gallery:["public/work-shots/fa-prev-1.webp","public/work-shots/fresh-air.webp","public/work-shots/fa-prev-3.webp"] },
+    link:"https://bayou-city-ac.vercel.app", img:"public/work-shots/bayou-city-ac.webp",
+    gallery:["public/work-shots/bayou-ops-1.webp","public/work-shots/bayou-ops-2.webp","public/work-shots/bayou-ops-3.webp"] },
   { title:"SAVAGE LLC Internal Portal", year:"2026", outcome:"React", cat:"Internal Tools",
     blurb:"Company operations dashboard for time tracking, tasks, announcements, chat, and files — daily staff workflows in one responsive workspace.",
     link:"https://github.com/ITGuns/Internal-Company-Portal---SAVAGE-LLC", img:"public/work-shots/company-portal-dashboard.png" },
@@ -780,15 +781,19 @@ PROJECTS.forEach((p,i) => {
             <p class="outcome">${p.outcome}</p>
           </div>
         </div>
-        <p class="cat">${p.cat}${p.gallery ? " &middot; Click to preview" : ""}</p>
+        <p class="cat">${p.cat}${p.gallery && !p.link ? " &middot; Click to preview" : ""}</p>
       </article>`;
-  li.innerHTML = p.link
-    ? `<a href="${p.link}" target="_blank" rel="noreferrer noopener">${card}</a>`
-    : p.gallery
-      ? `<button type="button" class="card-open" aria-haspopup="dialog">${card}</button>`
-      : card;
+  if (p.link){
+    li.innerHTML = `<a href="${p.link}" target="_blank" rel="noreferrer noopener">${card}</a>`
+      + (p.gallery ? `<button type="button" class="ops-btn" aria-haspopup="dialog">Ops panel preview</button>` : "");
+  } else if (p.gallery){
+    li.innerHTML = `<button type="button" class="card-open" aria-haspopup="dialog">${card}</button>`;
+  } else {
+    li.innerHTML = card;
+  }
   if (p.gallery){
-    li.querySelector(".card-open").addEventListener("click", () => lbOpen(p.title, p.gallery));
+    const trigger = li.querySelector(".ops-btn") || li.querySelector(".card-open");
+    trigger.addEventListener("click", () => lbOpen(p.title + (p.link ? " — Ops Panel" : ""), p.gallery));
   }
   workUl.appendChild(li);
   buildLiquid(li.querySelector("figure"));
