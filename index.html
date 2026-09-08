@@ -516,28 +516,28 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const PROJECTS = [
   { title:"ESC Food Hub", year:"2026", outcome:"PHP + MySQL", cat:"Food Ordering",
     blurb:"LAN-based food ordering for an internet café and food hub — customers order from assigned stations, staff manage everything from an admin dashboard.",
-    link:"https://github.com/pllxrgn-ui/esc-food-hub", img:null },
+    link:"https://github.com/pllxrgn-ui/esc-food-hub", img:"public/work-shots/esc-food-hub.webp" },
   { title:"SAVAGE LLC Internal Portal", year:"2026", outcome:"React", cat:"Internal Tools",
     blurb:"Company operations dashboard for time tracking, tasks, announcements, chat, and files — daily staff workflows in one responsive workspace.",
     link:"https://github.com/ITGuns/Internal-Company-Portal---SAVAGE-LLC", img:"public/work-shots/company-portal-dashboard.png" },
   { title:"Zakay", year:"2026", outcome:"Figma", cat:"Mobile UI/UX",
     blurb:"Smart route companion for Davao commuters — route discovery, travel comparison, and clearer guidance through local transit.",
-    link:"https://www.figma.com/design/kHko6qSXHIuSVWfweAAfyt/Untitled?node-id=0-1&t=fgLpNQs3PcqMhwcz-1", img:null },
+    link:"https://www.figma.com/design/kHko6qSXHIuSVWfweAAfyt/Untitled?node-id=0-1&t=fgLpNQs3PcqMhwcz-1", img:"public/work-shots/zakay-figma.webp" },
   { title:"NurseBot App", year:"2025", outcome:"Expo + AI", cat:"Healthcare",
     blurb:"AI-driven medical mobile app with medication reminders and conversational assistance around medical advice and drug information.",
-    link:"https://canva.link/3ueiop6zob3zzdi", img:null },
+    link:"https://canva.link/3ueiop6zob3zzdi", img:"public/work-shots/nursebot.webp" },
   { title:"Harbinger", year:"2024", outcome:"Raspberry Pi", cat:"Computer Vision",
     blurb:"Real-time object detection for intelligent monitoring, combining Raspberry Pi, PIR motion sensors, and computer vision.",
-    link:"https://canva.link/rsos337u5jqjelq", img:null },
+    link:"https://canva.link/rsos337u5jqjelq", img:"public/work-shots/harbinger.webp" },
   { title:"Ordering &amp; Inventory Suite", year:"2024", outcome:"Java", cat:"Business Ops",
     blurb:"Ordering, sales reporting, inventory management, and employee sorting — data handling and algorithmic thinking in a business context.",
-    link:"https://canva.link/hj8hw00lqbpvtq6", img:null },
+    link:"https://canva.link/hj8hw00lqbpvtq6", img:"public/work-shots/ordering-inventory.webp" },
   { title:"CRUD Issue Tracker", year:"2024", outcome:"Java", cat:"Academic Build",
     blurb:"Issue tracking system demonstrating imperative programming through create, read, update, and delete workflows.",
-    link:"https://canva.link/m3e45cy1bbq5xb9", img:null },
+    link:"https://canva.link/m3e45cy1bbq5xb9", img:"public/work-shots/crud-tracker.webp" },
   { title:"Clinic Management System", year:"2023–24", outcome:"React + Supabase", cat:"Clinic Ops",
     blurb:"Digitized appointment scheduling and medical records for an occupational and special-needs clinic, replacing paper-heavy workflows.",
-    link:"https://canva.link/dik5io9s6xbkc6j", img:null },
+    link:"https://canva.link/dik5io9s6xbkc6j", img:"public/work-shots/clinic-management.webp" },
 ];
 
 const EXPERIENCE = [
@@ -732,6 +732,25 @@ CERTS.forEach(([t,issuer,date,href]) => {
     </a>`;
   certUl.appendChild(li);
 });
+
+/* ---------- hero name fit-to-width ---------- */
+function fitHeroName(){
+  const name = document.getElementById("heroName");
+  const lines = name.querySelectorAll(".nl");
+  const probe = 100;
+  let maxRatio = 0;
+  lines.forEach(l => {
+    l.style.fontSize = probe + "px";
+    maxRatio = Math.max(maxRatio, l.scrollWidth / probe);
+  });
+  lines.forEach(l => l.style.removeProperty("font-size"));
+  if (maxRatio > 0){
+    name.style.fontSize = (document.documentElement.clientWidth * 0.985 / maxRatio) + "px";
+  }
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeroName);
+fitHeroName();
+addEventListener("resize", fitHeroName);
 
 /* ---------- hero name letter split ---------- */
 document.querySelectorAll("#heroName .nl").forEach(line => {
