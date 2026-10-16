@@ -473,7 +473,7 @@ section.pad,footer.pad{padding:var(--section) var(--gutter)}
           <span class="line-mask"><span>to be used.</span></span>
         </h2>
       </div>
-      <p class="sec-count rv">09 / Projects</p>
+      <p class="sec-count rv">13 / Projects</p>
     </div>
     <ul class="cards" id="workCards"></ul>
   </section>
@@ -646,6 +646,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 /* ---------- data ---------- */
 const PROJECTS = [
+  { title:"JC Pickle Box", year:"2026", outcome:"Next.js + Prisma", cat:"Client Web Design",
+    blurb:"A booking site for a two-court pickleball venue in Kidapawan City, live and taking reservations: court booking with deposits and add-ons, house rules, and an admin that records payments and manages customers.",
+    link:"https://jcpicklebox.vercel.app", img:"public/work-shots/jcpicklebox.webp" },
+  { title:"Deskii", year:"2026", outcome:"Next.js + Express", cat:"Production SaaS",
+    blurb:"Payroll and time management shipped to a live workspace operations platform: time tracking, payroll computation, and a v2 payroll flow delivered to production through pull-request review.",
+    link:"https://mydeskii.com", img:"public/work-shots/deskii.webp" },
+  { title:"Speed Trap Tap House", year:"2026", outcome:"Next.js + Prisma", cat:"Client Web Design",
+    blurb:"A live site for a bar and grill on Highway 2 in Reardan, Washington, with a production admin behind it: booking inbox, owner-managed site content, and privacy-conscious pageview analytics.",
+    link:"https://thespeedtrap.vercel.app", img:"public/work-shots/speed-trap-taphouse.webp" },
+  { title:"Gemfield Control Panel", year:"2026", outcome:"Next.js + Prisma", cat:"Internal Tools",
+    blurb:"An internal panel that watches an agency's client sites: scheduled health probes, visit counts, and an is-it-running view across four production deployments.",
+    link:"https://gemfielddashboard.vercel.app", img:"public/work-shots/gemfield-panel.webp" },
   { title:"Chapman's A/C & Heating", year:"2026", outcome:"Next.js + Tailwind", cat:"Client Web Design",
     blurb:"A mobile-first, accessibility-led rebuild for a Louisiana HVAC contractor: 32 routes with WCAG 2.2 AA as a hard gate, plus a staff ops panel with dispatch board, leads, and live chat.",
     link:"https://chapmans-ac.vercel.app", img:"public/work-shots/chapmans-ac.webp",
